@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>प्रेम</title>
+  <style>
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  height: 100vh;
+  overflow: hidden;
+  text-align: center;
+
+  /* background image */
+  background-image: url("bg2.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+    .container, .celebration, .letter-section {
+      width: 100%;
+      height: 100vh;
+      display: none;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* 🔥 Common Box Style (सब पर लागू होगा) */
+.box {
+  background: rgba(255,255,255,0.9);
+  padding: 40px;
+  border-radius: 25px;
+
+  /* glass effect */
+  backdrop-filter: blur(8px);
+
+  /* shadow */
+  box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+
+  width: 337px;
+  max-width: 95%;
+  position: relative;
+  z-index: 20;
+  text-align: center;
+  margin: auto;
+
+  /* smooth animation */
+  transition: transform 0.3s ease;
+}
+
+.box:hover{
+  transform: scale(1.02);
+}
+
+    /* Proposal Page */
+    .container img { width: 180px; margin-bottom: 25px; }
+    h2 {
+      margin-bottom: 15px;
+      font-size: 30px;
+
+      animation: pulse 5.5s infinite;
+
+      color: #d6336c;
+    }
+    #sub {
+      font-size: 18px;
+      margin-bottom: 20px;
+      color: #555;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin: 10px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.2s;
+      position: relative;
+    }
+    .yes { background: #ff4d6d; color: #fff; }
+    .no  { background: #ccc; }
+
+    /* Celebration */
+    .celebration {
+      flex-direction: column;
+      background-image: url(final_bg.jpg);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .celebration .content {
+      mask-composite: box;
+    }
+
+    .celebration img.love-img { width: 150px; margin-bottom: 8px; }
+    .celebration h1 { color: #ff4d6d; margin: 6px 0 18px; }
+
+    /* Letter Section */
+   .letter-section {
+  display: none;
+  flex-direction: column;
+  justify-content: flex-start;  /* ऊपर से शुरू होगा */
+  align-items: center;          /* बीच में horizontally */
+  padding: 40px 10px;           /* ऊपर-नीचे gap */
+  overflow-y: auto;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+
+.letter-box {
+  background: #fff;
+  padding: 40px;
+  border-radius: 25px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+  width: 320px;
+  max-width: 95%;
+  margin: 20px 0;   /* ऊपर और नीचे बराबर gap */
+  text-align: center;
+}
+
+
+    .letter-box h2 {
+      text-align: center;
+      color: #d6336c;
+      margin-bottom: 20px;
+      font-size: 28px;
+    }
+
+    .letter-box p {
+      line-height: 1.8;
+      font-size: 17px;
+      color: #333;
+      white-space: pre-line;
+    }
+
+    .heart-decor {
+      position: absolute;
+      top: -20px;
+      right: -20px;
+      font-size: 40px;
+      color: #ff4d6d;
+      animation: pulse 1.5s infinite;
+    }
+
+    .signature {
+      margin-top: 25px;
+      text-align: right;
+      font-weight: bold;
+      color: #0d6efd;
+      font-size: 18px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(1.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
+
+    /* Balloons */
+     .balloon {
+      position: absolute;
+      bottom: -160px;
+      width: 105px;   /* image size */
+      height: auto;  /* aspect ratio maintain hoga */
+      animation: floatUp linear forwards;
+      z-index: 8;
+}
+
+    .balloon::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: -38px;
+      width: 2px;
+      height: 40px;
+      background: #555;
+      transform: translateX(-50%);
+    }
+
+    .heart {
+      position: absolute;
+      bottom: -120px;
+      width: 130px;
+      height: 130px;
+      animation: floatUp linear forwards;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 12;
+    }
+
+
+    .heart svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .heart text {
+      font-size: 15px;
+      font-weight: bold;
+      fill: #fff;
+      height: 80;
+      text-anchor: middle;
+      dominant-baseline: middle;
+    }
+   @keyframes zoomShrink {
+  from { transform: scale(2); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}
+
+.zoomShrink {
+  animation: zoomShrink 0.9s ease forwards;
+}
+
+
+    @keyframes floatUp {
+      0%   { transform: translateY(0) scale(1); opacity: 1; }
+      100% { transform: translateY(-120vh) scale(1.15); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Proposal Page -->
+ 
+  <div class="container" id="container">
+    <div class="box">
+      <img id="stepImg" src="001.gif" alt="cute">
+      <h2 id="question">💖 क्या तुम मुझसे प्यार करते हो 💖</h2>
+      <p id="sub">मैं सिर्फ तुम्हारा हूँ</p>
+      <div>
+        <button class="yes" onclick="sayYes()">हाँ</button>
+        <button class="no" id="noBtn" onclick="sayNo()">नहीं</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Celebration Page -->
+  <div class="celebration" id="celebration">
+    <div class="box content">
+      <img src="4.gif" alt="I love you so much baby" class="love-img">
+      <h1>💕 मुझे पता था! तुम भी मुझसे प्यार करते हो। 💕</h1>
+    
+      <button class="yes" onclick="showLetter()">🎉अगला🎉</button>
+    </div>
+  </div>
+  
+  <!-- Letter Page -->
+  <div class="letter-section" id="letterSection">
+    <div class="letter-box">
+      <div class="heart-decor">💖</div>
+        <h2>प्रिय संजना,</h2>
+        <p>
+1️⃣        
+🌹 ना दिल होता, ना दिल रोता,
+ना दिल दिल से जुदा होता।
+ना आप इतनी हसीं होतीं,
+ना दिल आप पर फ़िदा होता।
+
+2️⃣
+✨ तेरे साथ हर लम्हा खास है,
+तू ही मेरी दुनिया, तू ही मेरी आस है।
+
+3️⃣
+💖 तेरे बिना धड़कन अधूरी है,
+तू ही मेरी ज़िंदगी की पूरी है।
+
+4️⃣
+✨ तेरे बिना मेरा क्या होगा, 
+तू ही तो मेरा सपना, 
+तू ही तो सवेरा। 
+
+5️⃣
+🌸 तेरी आँखों में खो जाना चाहता हूँ,
+तेरे दिल में बस जाना चाहता हूँ।
+
+6️⃣
+❤️ तू हँसे तो लगे मौसम सुहाना,
+तेरे बिना दिल को ना लगे जमाना।
+
+7️⃣
+🌹 तेरी यादों से ही मेरी रात कटती है,
+तेरी चाहत से ही मेरी सुबह सजती है।
+
+8️⃣
+💖 तेरी मोहब्बत मेरी सबसे बड़ी दौलत है,
+तू ही मेरी चाहत, तू ही मेरी इबादत है।
+
+9️⃣
+✨ तेरे साथ हर लम्हा जादू सा लगता है,
+तेरे बिना ये दिल अधूरा सा लगता है।
+
+🔟
+🌸 तेरी मुस्कान ही मेरी जान है,
+तेरे बिना सब कुछ सुनसान है।
+
+        </p>
+      <div class="signature">
+        हमेशा तुम्हारा,<br>
+        Nitesh 💙
+      </div>
+      <audio id="letterMusic" controls style="margin-top:10px; width:300px;">
+        <source src="hume.mp3" type="audio/mpeg">
+        आपका ब्राउजर में ऑडियो तत्व समर्थित नहीं है।
+      </audio>
+    </div>
+  </div>
+
+<script>
+  let step = 0;
+  history.replaceState({page:"step", step:0}, "", "");
+  const images = ["001.gif","01.gif","1.gif","2.gif","3.jpg","4.gif"];
+  let balloonInterval = null;
+  let heartInterval = null;
+
+  // Start Proposal Page
+  document.getElementById("container").style.display = "flex";
+
+  function sayYes() {
+ 
+    history.pushState({page:"celebration"}, "", "");
+
+    document.getElementById("container").style.display = "none";
+    const celebration = document.getElementById("celebration");
+    celebration.style.display = "flex";
+
+    if (!balloonInterval) balloonInterval = setInterval(() => createBalloon(celebration), 650);
+    if (!heartInterval)   heartInterval   = setInterval(() => createHeart(celebration), 1100);
+  }
+
+  function showLetter() {
+ 
+    history.pushState({page:"letter"}, "", "");
+
+    document.getElementById("celebration").style.display = "none";
+
+    const letter = document.getElementById("letterSection");
+    letter.style.display = "flex";
+
+    const letterBox = letter.querySelector(".letter-box");
+    letterBox.classList.remove("zoomShrink");
+    void letterBox.offsetWidth;
+    letterBox.classList.add("zoomShrink");
+
+    const letterMusic = document.getElementById("letterMusic");
+    if (letterMusic) {
+      letterMusic.play().catch(err => console.log("Autoplay blocked:", err));
+    }
+  }
+
+  function sayNo() {
+    const q = document.getElementById("question");
+    const sub = document.getElementById("sub");
+    const img = document.getElementById("stepImg");
+    const noBtn = document.getElementById("noBtn");
+    const container = document.getElementById("container");
+
+    if(step === 0){
+      q.innerText = "कृपया फिर से सोचें! 💗";
+      sub.innerHTML = `इतनी जल्दी नहीं मत बोलो 😅
+        <br><br>
+          <audio controls autoplay style="margin-top:10px;">
+            <source src="LOVE.mp3" type="audio/mpeg">
+              आपका ब्राउजर में ऑडियो तत्व समर्थित नहीं है।
+          </audio>`;
+      img.src = images[1];
+    }
+
+    else if(step === 1){
+      q.innerText = "एक बार और सोच लो 🥹";
+      sub.innerText = "क्यू ऐसा कर रहे हो 🤔";
+      img.src = images[2];
+    } 
+
+    else if(step === 2){
+      q.innerText = "मत करो ना ऐसा 😔";
+      sub.innerText = "तुम मेरी दुनिया हो 💖";
+      img.src = images[3];
+    } 
+
+    else if(step === 3){
+      q.innerText = "बेबी यार जाओ ना! कितना भाव खाओगी 😭";
+      sub.innerText = "बहुत गलत बात है यार 😢";
+      img.src = images[4];
+
+      noBtn.style.position = "relative"; // ✅ absolute हटाया
+      noBtn.onmousemove = function(){
+        let maxX = 200; // ✅ box के अंदर limit
+        let maxY = 80;
+        let x = Math.floor(Math.random() * maxX);
+        let y = Math.floor(Math.random() * maxY);
+        noBtn.style.transition = "0s";
+        noBtn.style.left = x + "px";
+        noBtn.style.top = y + "px";
+      };
+    }
+    else {
+      q.innerText = "अब तो मैं पकड़ के रहूंगी! 😼";
+      sub.innerText = "नो का ऑप्शन मिलना ही मुश्किल है 🤭";
+      img.src = images[5];
+    }
+
+    step++;
+    history.pushState({page:"step", step: step}, "", "");
+  }
+
+  function randomColor() {
+    const colors = ["#ff4d6d","#ffb347","#6a5acd","#00c49a","#ff69b4","#ffa07a"];
+    return colors[Math.floor(Math.random()*colors.length)];
+  }
+
+  const balloonImages = ["balloon1.png","balloon2.png","balloon3.png","balloon4.png"]; // apne balloons ke images dal do
+
+  function pickBalloonImage() {
+    return balloonImages[Math.floor(Math.random() * balloonImages.length)];
+  }
+
+  function createBalloon(parent) {
+    const balloon = document.createElement("img");
+    balloon.className = "balloon";
+    balloon.src = pickBalloonImage(); // random image pick hoga
+  
+    const parentW = parent.clientWidth || window.innerWidth;
+    const left = Math.random() * (parentW - 60);
+    balloon.style.left = left + "px";
+
+    const dur = 6 + Math.random() * 4;
+    balloon.style.animationDuration = dur + "s";
+
+    parent.appendChild(balloon);
+    setTimeout(() => balloon.remove(), (dur + 0.5) * 1000);
+  }
+
+  const heartImages = ["sanjana.jpeg","nitesh.jpeg"]; // aapki images
+
+  function pickHeartImage(i) {
+    return heartImages[i % heartImages.length]; // round-robin se images pick hongi
+  }
+
+  let heartIdCounter = 0;
+
+  function createHeart(parent) {
+    const count = 2;
+    for (let i = 0; i < count; i++) {
+      heartIdCounter++; // हर बार बढ़ेगा
+      const uniqueId = `heartClip${heartIdCounter}`;
+
+      const heart = document.createElement("div");
+      heart.className = "heart";
+
+      const parentW = parent.clientWidth || window.innerWidth;
+      const left = Math.random() * (parentW - 150) + (i * 40);
+      heart.style.left = left + "px";
+
+      const dur = 5 + Math.random() * 2 + i * 0.5;
+      heart.style.animationDuration = dur + "s";
+
+      const pickedImage = pickHeartImage(i);
+
+      const svg = `
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <clipPath id="${uniqueId}">
+              <path d="M100 180 L40 120 A40 40 0 1 1 100 60 A40 40 0 1 1 160 120 Z"/>
+            </clipPath>
+          </defs>
+          <image href="${pickedImage}" width="200" height="200" clip-path="url(#${uniqueId})"/>
+        </svg>`;
+
+      heart.innerHTML = svg;
+      parent.appendChild(heart);
+
+      setTimeout(() => heart.remove(), (dur + 0.5) * 1000);
+    }
+  }
+
+window.onpopstate = function(e){
+
+  const container = document.getElementById("container");
+  const celebration = document.getElementById("celebration");
+  const letter = document.getElementById("letterSection");
+
+  const q = document.getElementById("question");
+  const sub = document.getElementById("sub");
+  const img = document.getElementById("stepImg");
+
+  const letterMusic = document.getElementById("letterMusic");
+  if(letterMusic){
+      letterMusic.pause();
+      letterMusic.currentTime = 0;
+  }
+
+  if(!e.state) return;
+
+  /* proposal steps */
+
+  if(e.state.page === "step"){
+
+      step = e.state.step;
+
+      container.style.display = "flex";
+      celebration.style.display = "none";
+      letter.style.display = "none";
+
+      if(step === 0){
+          q.innerText = "💖 क्या तुम मुझसे प्यार करते हो 💖";
+          sub.innerText = "मैं सिर्फ तुम्हारा हूँ";
+          img.src = "001.gif";
+      }
+      else if(step === 1){
+          q.innerText = "कृपया फिर से सोचें! 💗";
+          sub.innerText = "इतनी जल्दी नहीं मत बोलो 😅";
+          img.src = "01.gif";
+      }
+      else if(step === 2){
+          q.innerText = "एक बार और सोच लो 🥹";
+          sub.innerText = "क्यू ऐसा कर रहे हो 🤔";
+          img.src = "1.gif";
+      }
+      else if(step === 3){
+          q.innerText = "मत करो ना ऐसा 😔";
+          sub.innerText = "तुम मेरी दुनिया हो 💖";          
+          img.src = "2.gif";
+      }
+
+      return;
+  }
+
+  /* celebration */
+
+  if(e.state.page === "celebration"){
+      container.style.display = "none";
+      letter.style.display = "none";
+      celebration.style.display = "flex";
+      return;
+  }
+
+  /* letter */
+
+  if(e.state.page === "letter"){
+      container.style.display = "none";
+      celebration.style.display = "none";
+      letter.style.display = "flex";
+  }
+
+};
+</script>
+</body>
+</html>
+
